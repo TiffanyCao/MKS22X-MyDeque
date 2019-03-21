@@ -66,7 +66,7 @@ public class MyDeque<E>{
         d[i - start] = data[i];
       }
       for(int y = 0; y <= end; y++){
-        
+
       }
     }
   }
