@@ -28,10 +28,16 @@ public class MyDeque<E>{
     return size;
   }
 
+  /**A method that returns the element at start
+  *@return E
+  */
   public E getFirst(){
     return data[start];
   }
 
+  /**A method that returns the element at end
+  *@return E
+  */
   public E getLast(){
     return data[end];
   }
@@ -145,13 +151,23 @@ public class MyDeque<E>{
   public void resize(E element){
     @SuppressWarnings("unchecked")
     E[] d = (E[]) new Object[data.length * 2 + 1];
-    int index = 1;
     d[0] = element;
-    for(int i = start; i < (size - start) + start; i++){
-      d[index] = data[i];
-    }
-    for(int y = 0; y <= end; y++){
-      d[index] = data[y];
+    if(start != 0 && end < start){
+      int index = 1;
+      for(int i = start; i < (size - start) + start; i++){
+        d[index] = data[i];
+        index++;
+      }
+      for(int y = 0; y <= end; y++){
+        d[index] = data[y];
+        index++;
+      }
+    }else if(end > start){
+      int index = 1;
+      for(int i = start; i <= end; i++){
+        d[index] = data[i];
+        index++;
+      }
     }
     size++;
     data = d;
@@ -206,6 +222,20 @@ public class MyDeque<E>{
     System.out.println(test.end);
 
     test.addFirst(0);
+    System.out.println();
+    System.out.println(test.print());
+    System.out.println(test);
+    System.out.println(test.start);
+    System.out.println(test.end);
+
+    test.addFirst(1);
+    System.out.println();
+    System.out.println(test.print());
+    System.out.println(test);
+    System.out.println(test.start);
+    System.out.println(test.end);
+
+    test.addFirst(2);
     System.out.println();
     System.out.println(test.print());
     System.out.println(test);
