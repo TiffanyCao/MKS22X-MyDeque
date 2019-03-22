@@ -3,25 +3,45 @@ public class MyDeque<E>{
   private E[] data;
   private int size, start, end;
 
+  /**A constructor for MyDeque
+  *creates an array of size 10 by default
+  */
   public MyDeque(){
     @SuppressWarnings("unchecked")
     E[] d = (E[]) new Object[10];
     data = d;
   }
 
+  /**A second constructor for specified array size
+  *@param int initialCapacity is the given array size
+  */
   public MyDeque(int initialCapacity){
     @SuppressWarnings("unchecked")
     E[] d = (E[]) new Object[initialCapacity];
     data = d;
   }
 
+  /**A method that returns the size or number of objects in the array
+  *@return int size
+  */
   public int size(){
     return size;
   }
 
+  public E getFirst(){
+    return data[start];
+  }
+
+  public E getLast(){
+    return data[end];
+  }
+
+  /**A method that prints the array as is (not in order)
+  @return String result
+  */
   public String print(){
     String result = "[";
-    for(int i = 0; i < data.length; i++){
+    for(int i = 0; i < data.length; i++){ //loops through data
       if(i == data.length - 1){
         result += data[i] + "]";
       }else result += data[i] + ", ";
@@ -29,26 +49,29 @@ public class MyDeque<E>{
     return result;
   }
 
+  /**A method that prints the array in order from smallest value to greatest value
+  @return String result
+  */
   public String toString(){
     String result = "[";
-    if(start != 0 && end < start){
-      for(int i = start; i < (size - start) + start; i++){
+    if(start != 0 && end < start){ //if end is less than start...
+      for(int i = start; i < (size - start) + start; i++){ //add values from start first
         result += data[i] + ", ";
       }
-      for(int y = 0; y <= end; y++){
+      for(int y = 0; y <= end; y++){ //then add values up to the end
         if(y != end){
           result += data[y] + ", ";
         }else result += data[y];
       }
-    }else if(end > start){
-      for(int i = start; i <= end; i++){
+    }else if(end > start){ //if end isn't less than start...
+      for(int i = start; i <= end; i++){ //add from start to end
         if(i != end){
           result += data[i] + ", ";
         }else result += data[i];
       }
     }
     result += "]";
-    return result;
+    return result; //return the string
   }
 
   public void addFirst(E element){
@@ -197,10 +220,5 @@ public class MyDeque<E>{
     test.addLast(0);
     */
 
-    /*System.out.println(test.print());
-    System.out.println(test);
-    System.out.println(test.start);
-    System.out.println(test.end);
-    */
   }
 }
