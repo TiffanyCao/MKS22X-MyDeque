@@ -80,6 +80,9 @@ public class MyDeque<E>{
     return result; //return the string
   }
 
+  /**A method that adds an element as start
+  *@param E element
+  */
   public void addFirst(E element){
     if(size == 0){ //if the array is empty
       data[0] = element;
@@ -97,17 +100,28 @@ public class MyDeque<E>{
       start--;
       size++;
       //System.out.println(3);
-    }else if((start != 0 && end == (start - 1)) || size == data.length){ //if not, resize and add
-      resize(element);
+    }else if((start != 0 && end == (start - 1)) || size == data.length){ //if no more elements can be added, resize then add as start
+      resize();
+      data[end + 1] = element;
+      start = end + 1;
+      size++;
     }
   }
 
+  /**A method that adds an element as end
+  *@param E element
+  */
   public void addLast(E element){
-    if(size != data.length && end >= start && end < (data.length - 1)){ //if more elements can be added at the end of the array
+    if(size == 0){ //if this is the first element
+      data[0] = element;
+      start = 0;
+      end = 0;
+      size++;
+    }else if(size != data.length && end >= start && end < (data.length - 1)){ //if more elements can be added toward the back of the array
       data[end + 1] = element;
       end++;
       size++;
-    }else if(size != data.length && end == (data.length - 1)){ //if more elements can be added to the start of the array
+    }else if(size != data.length && end == (data.length - 1)){ //if the end index is at the last index of the array but more elements can be added to the front
       data[0] = element;
       end = 0;
       size++;
@@ -123,32 +137,34 @@ public class MyDeque<E>{
     }
   }
 
+  /**A method that creates a larger array than the current array and copies over the elements in order
+  */
   public void resize(){
     @SuppressWarnings("unchecked")
-    E[] d = (E[]) new Object[data.length * 2 + 1];
-    if(start != 0 && end < start){
+    E[] d = (E[]) new Object[data.length * 2 + 1]; //new empty array
+    if(start != 0 && end < start){ //if start is not the zero index and end is less than start...
       int index = 0;
-      for(int i = start; i < data.length; i++){
+      for(int i = start; i < (size - start) + start; i++){ //copy over from start
         d[index] = data[i];
         index++;
       }
-      for(int y = 0; y <= end; y++){
+      for(int y = 0; y <= end; y++){ //copy over from zero to end
         d[index] = data[y];
         index++;
       }
-    }else if(end > start){
+    }else if(end > start){ //otherwise, copy over from end to start
       int index = 0;
       for(int i = start; i <= end; i++){
         d[index] = data[i];
         index++;
       }
     }
-    data = d;
-    start = 0;
-    end = this.size() - 1;
+    data = d; //set data to new, larger array
+    start = 0; //set start to zero
+    end = this.size() - 1; //set end to size-1
   }
 
-  public void resize(E element){
+  /*public void resize(E element){
     @SuppressWarnings("unchecked")
     E[] d = (E[]) new Object[data.length * 2 + 1];
     d[0] = element;
@@ -173,7 +189,7 @@ public class MyDeque<E>{
     data = d;
     start = 0;
     end = this.size() - 1;
-  }
+  }*/
 
   public static void main(String[] args){
     MyDeque<Integer> test = new MyDeque<Integer>(2);
