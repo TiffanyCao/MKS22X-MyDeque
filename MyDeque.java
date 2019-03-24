@@ -188,6 +188,10 @@ public class MyDeque<E>{
     }
   }
 
+  /**A method that removes the element at the last index
+  *@return E element
+  *@throws NoSuchElementException if deque is empty
+  */
   public E removeLast(){
     if(size == 0){
       throw new NoSuchElementException();
@@ -233,6 +237,9 @@ public class MyDeque<E>{
     end = this.size() - 1; //set end to size-1
   }
 
+  /**A method that creates a larger array than the current array and copies over the elements in order
+  *@param E element is added to the start
+  */
   public void resize(E element){
     @SuppressWarnings("unchecked")
     E[] d = (E[]) new Object[data.length * 2 + 1];
