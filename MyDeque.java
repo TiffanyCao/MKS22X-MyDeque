@@ -97,7 +97,7 @@ public class MyDeque<E>{
   *@throws NullPointerException element should not be null
   */
   public void addFirst(E element){
-    if(element == null){
+    if(element == null){ //if the element is nu;;
       throw new NullPointerException();
     }
     if(size == 0){ //if the array is empty
@@ -131,7 +131,7 @@ public class MyDeque<E>{
   *element should not be null
   */
   public void addLast(E element){
-    if(element == null){
+    if(element == null){ //if the element is null
       throw new NullPointerException();
     }
     if(size == 0){ //if this is the first element
@@ -163,14 +163,18 @@ public class MyDeque<E>{
     }
   }
 
+  /**A method that removes the element at the start index
+  *@return E element
+  *@throws NoSuchElementException if deque is empty
+  */
   public E removeFirst(){
-    if(size == 0){
+    if(size == 0){ //if the deque is empty
       throw new NoSuchElementException();
     }
     E temp = data[start]; //store the element
-    data[start] = null; //set index to null
+    data[start] = null; //set element at index to null
     size--; //decrease the size
-    if(start != ((size - start) + start)){ //if start isn't the last index
+    if(start != ((size - start) + start)){ //if start isn't the last index with a value
       start++; //start index increases
       return temp;
     }else{ //if start is the last index
@@ -309,16 +313,17 @@ public class MyDeque<E>{
     System.out.println(test.end);
     System.out.println(test.size());
 
-    test.removeFirst();
     System.out.println();
+    System.out.println("removed: " + test.removeFirst());
     System.out.println(test.print());
     System.out.println("order: " + test);
     System.out.println(test.start);
     System.out.println(test.end);
     System.out.println(test.size());
 
-    test.removeFirst();
+
     System.out.println();
+    System.out.println("removed: " + test.removeFirst());
     System.out.println(test.print());
     System.out.println("order: " + test);
     System.out.println(test.start);
@@ -349,5 +354,25 @@ public class MyDeque<E>{
     System.out.println(test.end);
     System.out.println(test.size());
 
+    System.out.println();
+    MyDeque<Integer> test2 = new MyDeque<Integer>(5);
+    test2.addFirst(10);
+    test2.addLast(11);
+    test2.addLast(12);
+    test2.addLast(13);
+    test2.addFirst(0);
+    System.out.println(test2.print());
+    System.out.println("order: " + test2);
+    System.out.println(test2.start);
+    System.out.println(test2.end);
+    System.out.println(test2.size());
+
+    System.out.println();
+    System.out.println("removed: " + test2.removeFirst());
+    System.out.println(test2.print());
+    System.out.println("order: " + test2);
+    System.out.println(test2.start);
+    System.out.println(test2.end);
+    System.out.println(test2.size());
   }
 }
