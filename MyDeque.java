@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class MyDeque<E>{
 
   private E[] data;
@@ -10,6 +12,7 @@ public class MyDeque<E>{
     @SuppressWarnings("unchecked")
     E[] d = (E[]) new Object[10];
     data = d;
+    size = 0;
   }
 
   /**A second constructor for specified array size
@@ -19,6 +22,7 @@ public class MyDeque<E>{
     @SuppressWarnings("unchecked")
     E[] d = (E[]) new Object[initialCapacity];
     data = d;
+    size = 0;
   }
 
   /**A method that returns the size or number of objects in the array
@@ -30,15 +34,23 @@ public class MyDeque<E>{
 
   /**A method that returns the element at start
   *@return E
+  *@throws NoSuchElementException if deque is empty
   */
   public E getFirst(){
+    if(size == 0){
+      throw new NoSuchElementException();
+    }
     return data[start];
   }
 
   /**A method that returns the element at end
   *@return E
+  *@throws NoSuchElementException if deque is empty
   */
   public E getLast(){
+    if(size == 0){
+      throw new NoSuchElementException();
+    }
     return data[end];
   }
 
@@ -46,11 +58,11 @@ public class MyDeque<E>{
   @return String result
   */
   public String print(){
-    String result = "[";
+    String result = "{";
     for(int i = 0; i < data.length; i++){ //loops through data
       if(i == data.length - 1){
-        result += data[i] + "]";
-      }else result += data[i] + ", ";
+        result += data[i] + "}";
+      }else result += data[i] + " ";
     }
     return result;
   }
@@ -59,31 +71,35 @@ public class MyDeque<E>{
   @return String result
   */
   public String toString(){
-    String result = "[";
+    String result = "{";
     if(start != 0 && end < start){ //if end is less than start...
       for(int i = start; i < (size - start) + start; i++){ //add values from start first
-        result += data[i] + ", ";
+        result += data[i] + " ";
       }
       for(int y = 0; y <= end; y++){ //then add values up to the end
         if(y != end){
-          result += data[y] + ", ";
+          result += data[y] + " ";
         }else result += data[y];
       }
     }else if(end > start){ //if end isn't less than start...
       for(int i = start; i <= end; i++){ //add from start to end
         if(i != end){
-          result += data[i] + ", ";
+          result += data[i] + " ";
         }else result += data[i];
       }
     }
-    result += "]";
+    result += "}";
     return result; //return the string
   }
 
   /**A method that adds an element as start
   *@param E element
+  *@throws NullPointerException element should not be null
   */
   public void addFirst(E element){
+    if(element == null){
+      throw new NullPointerException();
+    }
     if(size == 0){ //if the array is empty
       data[0] = element;
       start = 0;
@@ -101,17 +117,23 @@ public class MyDeque<E>{
       size++;
       //System.out.println(3);
     }else if((start != 0 && end == (start - 1)) || size == data.length){ //if no more elements can be added, resize then add as start
-      resize();
-      data[end + 1] = element;
+      resize(element);
+      /*data[end + 1] = element;
       start = end + 1;
       size++;
+      */
     }
   }
 
   /**A method that adds an element as end
   *@param E element
+  *@throws NullPointerException element should not be null
+  *element should not be null
   */
   public void addLast(E element){
+    if(element == null){
+      throw new NullPointerException();
+    }
     if(size == 0){ //if this is the first element
       data[0] = element;
       start = 0;
@@ -121,19 +143,39 @@ public class MyDeque<E>{
       data[end + 1] = element;
       end++;
       size++;
+      //System.out.println(1);
     }else if(size != data.length && end == (data.length - 1)){ //if the end index is at the last index of the array but more elements can be added to the front
       data[0] = element;
       end = 0;
       size++;
-    }else if(size != data.length && end < start){ //if more elements can be added before the start index;
+      //System.out.println(2);
+    }else if(size != data.length && end < start && (end != start - 1)){ //if more elements can be added before the start index;
       data[end + 1] = element;
       end++;
       size++;
+      //System.out.println(3);
     }else if(size == data.length || end == (start - 1)){ //if no more elements can be added, resize then add
       resize();
       data[end + 1] = element;
       end++;
       size++;
+      //System.out.println(4);
+    }
+  }
+
+  public E removeFirst(){
+    if(size == 0){
+      throw new NoSuchElementException();
+    }
+    E temp = data[start]; //store the element
+    data[start] = null; //set index to null
+    size--; //decrease the size
+    if(start != ((size - start) + start)){ //if start isn't the last index
+      start++; //start index increases
+      return temp;
+    }else{ //if start is the last index
+      start = 0; //start index becomes 0
+      return temp;
     }
   }
 
@@ -164,7 +206,7 @@ public class MyDeque<E>{
     end = this.size() - 1; //set end to size-1
   }
 
-  /*public void resize(E element){
+  public void resize(E element){
     @SuppressWarnings("unchecked")
     E[] d = (E[]) new Object[data.length * 2 + 1];
     d[0] = element;
@@ -189,7 +231,7 @@ public class MyDeque<E>{
     data = d;
     start = 0;
     end = this.size() - 1;
-  }*/
+  }
 
   public static void main(String[] args){
     MyDeque<Integer> test = new MyDeque<Integer>(2);
@@ -197,74 +239,115 @@ public class MyDeque<E>{
     test.addFirst(8);
 
     System.out.println(test.print());
-    System.out.println(test);
+    System.out.println("order: " + test);
     System.out.println(test.start);
     System.out.println(test.end);
+    System.out.println(test.size());
 
     test.resize();
     System.out.println();
     System.out.println(test.print());
-    System.out.println(test);
+    System.out.println("order: " + test);
     System.out.println(test.start);
     System.out.println(test.end);
+    System.out.println(test.size());
 
 
     test.addLast(7);
     System.out.println();
     System.out.println(test.print());
-    System.out.println(test);
+    System.out.println("order: " + test);
     System.out.println(test.start);
     System.out.println(test.end);
+    System.out.println(test.size());
 
     test.addLast(6);
     System.out.println();
     System.out.println(test.print());
-    System.out.println(test);
+    System.out.println("order: " + test);
     System.out.println(test.start);
     System.out.println(test.end);
+    System.out.println(test.size());
 
     test.addLast(5);
     System.out.println();
     System.out.println(test.print());
-    System.out.println(test);
+    System.out.println("order: " + test);
     System.out.println(test.start);
     System.out.println(test.end);
+    System.out.println(test.size());
 
     test.addLast(4);
     System.out.println();
     System.out.println(test.print());
-    System.out.println(test);
+    System.out.println("order: " + test);
     System.out.println(test.start);
     System.out.println(test.end);
+    System.out.println(test.size());
 
     test.addFirst(0);
     System.out.println();
     System.out.println(test.print());
-    System.out.println(test);
+    System.out.println("order: " + test);
     System.out.println(test.start);
     System.out.println(test.end);
+    System.out.println(test.size());
 
     test.addFirst(1);
     System.out.println();
     System.out.println(test.print());
-    System.out.println(test);
+    System.out.println("order: " + test);
     System.out.println(test.start);
     System.out.println(test.end);
+    System.out.println(test.size());
 
     test.addFirst(2);
     System.out.println();
     System.out.println(test.print());
-    System.out.println(test);
+    System.out.println("order: " + test);
     System.out.println(test.start);
     System.out.println(test.end);
-    /*test.addLast(6);
-    test.addLast(5);
-    test.addLast(4);
-    test.addLast(3);
-    test.addLast(2);
-    test.addLast(1);
-    test.addLast(0);
-    */
+    System.out.println(test.size());
+
+    test.removeFirst();
+    System.out.println();
+    System.out.println(test.print());
+    System.out.println("order: " + test);
+    System.out.println(test.start);
+    System.out.println(test.end);
+    System.out.println(test.size());
+
+    test.removeFirst();
+    System.out.println();
+    System.out.println(test.print());
+    System.out.println("order: " + test);
+    System.out.println(test.start);
+    System.out.println(test.end);
+    System.out.println(test.size());
+
+    test.addFirst(-1);
+    System.out.println();
+    System.out.println(test.print());
+    System.out.println("order: " + test);
+    System.out.println(test.start);
+    System.out.println(test.end);
+    System.out.println(test.size());
+
+    test.addFirst(-2);
+    System.out.println();
+    System.out.println(test.print());
+    System.out.println("order: " + test);
+    System.out.println(test.start);
+    System.out.println(test.end);
+    System.out.println(test.size());
+
+    test.addLast(10);
+    System.out.println();
+    System.out.println(test.print());
+    System.out.println("order: " + test);
+    System.out.println(test.start);
+    System.out.println(test.end);
+    System.out.println(test.size());
 
   }
 }
