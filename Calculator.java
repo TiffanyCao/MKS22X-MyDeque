@@ -1,24 +1,29 @@
 import java.util.*;
 
 public class Calculator{
+
+  /**A method that reads in a string of an postfix expression and evaluates it
+  *@param String postfix expression
+  *@return double answer
+  */
   public static double eval(String s){
-    String[] operations = {"+", "-", "*", "/"};
-    MyDeque<Double> calculate = new MyDeque<Double>();
+    String[] operations = {"+", "-", "*", "/"}; //list of operations
+    MyDeque<Double> calculate = new MyDeque<Double>(); //create a deque
     Scanner read = new Scanner(s);
-    while(read.hasNext()){
+    while(read.hasNext()){ //read in the whole expression one-by-one
       String temp = read.next();
       //System.out.println(temp);
       int operationIndex = -1;
-      for(int i = 0; i < 4; i++){
+      for(int i = 0; i < 4; i++){ //check if it's an operation
         if(temp.equals(operations[i])) operationIndex = i;
       }
       //System.out.println(operationIndex);
-      if(operationIndex == -1){
+      if(operationIndex == -1){ //if it's not an operation, add the number to the deque
         calculate.addLast(Double.parseDouble(temp));
-      }else if(operationIndex != -1){
-        double right = calculate.removeLast();
+      }else if(operationIndex != -1){ //if it is an operation
+        double right = calculate.removeLast(); //remove the last two values
         double left = calculate.removeLast();
-        if(operationIndex == 0){
+        if(operationIndex == 0){ //check for which operation it is and perform it on the values
           calculate.addLast(left + right);
         }
         if(operationIndex == 1){
@@ -32,7 +37,7 @@ public class Calculator{
         }
       }
     }
-    return calculate.getFirst();
+    return calculate.getFirst(); //return the only value left in the deque
   }
 
   public static void main(String[] args){
