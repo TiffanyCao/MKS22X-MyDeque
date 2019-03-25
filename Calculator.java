@@ -7,14 +7,14 @@ public class Calculator{
   *@return double answer
   */
   public static double eval(String s){
-    String[] operations = {"+", "-", "*", "/"}; //list of operations
+    String[] operations = {"+", "-", "*", "/", "%"}; //list of operations
     MyDeque<Double> calculate = new MyDeque<Double>(); //create a deque
     Scanner read = new Scanner(s);
     while(read.hasNext()){ //read in the whole expression one-by-one
       String temp = read.next();
       //System.out.println(temp);
       int operationIndex = -1;
-      for(int i = 0; i < 4; i++){ //check if it's an operation
+      for(int i = 0; i < 5; i++){ //check if it's an operation
         if(temp.equals(operations[i])) operationIndex = i;
       }
       //System.out.println(operationIndex);
@@ -35,6 +35,9 @@ public class Calculator{
         if(operationIndex == 3){
           calculate.addLast(left / right);
         }
+        if(operationIndex == 4){
+          calculate.addLast(left % right);
+        }
       }
     }
     return calculate.getFirst(); //return the only value left in the deque
@@ -47,5 +50,6 @@ public class Calculator{
     System.out.println(eval("11 3 - 4 + 2.5 *")); //is 30.0
     System.out.println(eval("8 2 + 99 9 - * 2 + 9 -")); //is 893.0
     System.out.println(eval("1 2 3 4 5 + * - -")); //is 26.0
+    System.out.println(eval("10 5 % 5 + 20 + 5 %")); //is 0
   }
 }
