@@ -20,6 +20,10 @@ public class Calculator{
       //System.out.println(operationIndex);
       if(operationIndex == -1){ //if it's not an operation, add the number to the deque
         calculate.addLast(Double.parseDouble(temp));
+        /*System.out.println(calculate);
+        System.out.println(calculate.size());
+        System.out.println();
+        */
       }else if(operationIndex != -1){ //if it is an operation
         double right = calculate.removeLast(); //remove the last two values
         double left = calculate.removeLast();
@@ -38,6 +42,10 @@ public class Calculator{
         if(operationIndex == 4){
           calculate.addLast(left % right);
         }
+        /*System.out.println(calculate);
+        System.out.println(calculate.size());
+        System.out.println();
+        */
       }
     }
     return calculate.getFirst(); //return the only value left in the deque
@@ -51,5 +59,6 @@ public class Calculator{
     System.out.println(eval("8 2 + 99 9 - * 2 + 9 -")); //is 893.0
     System.out.println(eval("1 2 3 4 5 + * - -")); //is 26.0
     System.out.println(eval("10 5 % 5 + 20 + 5 %")); //is 0
+    System.out.println(eval("4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 + + + + + + + + + + + + + + + + + + + + + + + + + + +")); //is 108.0
   }
 }
