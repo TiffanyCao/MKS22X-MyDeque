@@ -280,7 +280,9 @@ public class MyDeque<E>{
     System.out.println("order: " + test);
     System.out.println("not ordered: " + test.print());
     System.out.println("start: " + test.start);
+    System.out.println(test.getFirst());
     System.out.println("end: " + test.end);
+    System.out.println(test.getLast());
     System.out.println("size: " + test.size());
 
     test.resize();
@@ -288,7 +290,9 @@ public class MyDeque<E>{
     System.out.println("order: " + test);
     System.out.println("not ordered: " + test.print());
     System.out.println("start: " + test.start);
+    System.out.println(test.getFirst());
     System.out.println("end: " + test.end);
+    System.out.println(test.getLast());
     System.out.println("size: " + test.size());
 
 
@@ -297,7 +301,9 @@ public class MyDeque<E>{
     System.out.println("order: " + test);
     System.out.println("not ordered: " + test.print());
     System.out.println("start: " + test.start);
+    System.out.println(test.getFirst());
     System.out.println("end: " + test.end);
+    System.out.println(test.getLast());
     System.out.println("size: " + test.size());
 
     test.addLast(6);
@@ -305,7 +311,9 @@ public class MyDeque<E>{
     System.out.println("order: " + test);
     System.out.println("not ordered: " + test.print());
     System.out.println("start: " + test.start);
+    System.out.println(test.getFirst());
     System.out.println("end: " + test.end);
+    System.out.println(test.getLast());
     System.out.println("size: " + test.size());
 
     test.addLast(5);
@@ -313,7 +321,9 @@ public class MyDeque<E>{
     System.out.println("order: " + test);
     System.out.println("not ordered: " + test.print());
     System.out.println("start: " + test.start);
+    System.out.println(test.getFirst());
     System.out.println("end: " + test.end);
+    System.out.println(test.getLast());
     System.out.println("size: " + test.size());
 
     test.addLast(4);
@@ -321,7 +331,9 @@ public class MyDeque<E>{
     System.out.println("order: " + test);
     System.out.println("not ordered: " + test.print());
     System.out.println("start: " + test.start);
+    System.out.println(test.getFirst());
     System.out.println("end: " + test.end);
+    System.out.println(test.getLast());
     System.out.println("size: " + test.size());
 
     test.addFirst(0);
@@ -329,7 +341,9 @@ public class MyDeque<E>{
     System.out.println("order: " + test);
     System.out.println("not ordered: " + test.print());
     System.out.println("start: " + test.start);
+    System.out.println(test.getFirst());
     System.out.println("end: " + test.end);
+    System.out.println(test.getLast());
     System.out.println("size: " + test.size());
 
     test.addFirst(1);
@@ -337,7 +351,9 @@ public class MyDeque<E>{
     System.out.println("order: " + test);
     System.out.println("not ordered: " + test.print());
     System.out.println("start: " + test.start);
+    System.out.println(test.getFirst());
     System.out.println("end: " + test.end);
+    System.out.println(test.getLast());
     System.out.println("size: " + test.size());
 
     test.addFirst(2);
@@ -345,7 +361,9 @@ public class MyDeque<E>{
     System.out.println("order: " + test);
     System.out.println("not ordered: " + test.print());
     System.out.println("start: " + test.start);
+    System.out.println(test.getFirst());
     System.out.println("end: " + test.end);
+    System.out.println(test.getLast());
     System.out.println("size: " + test.size());
 
     System.out.println();
@@ -353,7 +371,9 @@ public class MyDeque<E>{
     System.out.println("order: " + test);
     System.out.println("not ordered: " + test.print());
     System.out.println("start: " + test.start);
+    System.out.println(test.getFirst());
     System.out.println("end: " + test.end);
+    System.out.println(test.getLast());
     System.out.println("size: " + test.size());
 
 
@@ -362,7 +382,9 @@ public class MyDeque<E>{
     System.out.println("order: " + test);
     System.out.println("not ordered: " + test.print());
     System.out.println("start: " + test.start);
+    System.out.println(test.getFirst());
     System.out.println("end: " + test.end);
+    System.out.println(test.getLast());
     System.out.println("size: " + test.size());
 
     test.addFirst(-1);
@@ -370,7 +392,9 @@ public class MyDeque<E>{
     System.out.println("order: " + test);
     System.out.println("not ordered: " + test.print());
     System.out.println("start: " + test.start);
+    System.out.println(test.getFirst());
     System.out.println("end: " + test.end);
+    System.out.println(test.getLast());
     System.out.println("size: " + test.size());
 
     test.addFirst(-2);
